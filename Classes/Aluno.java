@@ -1,6 +1,11 @@
 package Classes;
 
 import Interfaces.User;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -9,21 +14,54 @@ import java.util.Map;
  * @author JeanM
  */
 public class Aluno implements User{
-    private int CPF; //essa é a ID do aluno e não pode ser alterada.
+    private int idalunos;
+    private String cpf;
     private String nome;
     private String email;
-    @SuppressWarnings("FieldMayBeFinal")// parar de dar aviso que progresso deve ser final (imutavel).
+    @SuppressWarnings("FieldMayBeFinal")
     private Map<String, Double> progresso; //(idioma e nível -> porcentagem de conclusão)
 
     //construtor
-    public Aluno(int CPF, String nome, String email){
+    public Aluno(String nome, String email, String cpf){
+        this.cpf = cpf;
         this.nome = nome;
         this.email = email;
         this.progresso = new HashMap<>(); //inicializando o mapa
     }
 
+    // Método para adicionar aluno ao banco de dados
+    public int addAluno(Connection connection) throws SQLException {
+        String query = "INSERT INTO alunos (nome, email, cpf) VALUES (?, ?, ?)";
+        try (PreparedStatement stmt = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
+            stmt.setString(1, nome);
+            stmt.setString(2, email);
+            stmt.setString(3, cpf);
+            stmt.executeUpdate();
+
+            try (ResultSet rs = stmt.getGeneratedKeys()) {
+                if (rs.next()) {
+                    this.idalunos = rs.getInt(1); // Retorna o ID gerado
+                    return idalunos;
+                }
+            }
+        }
+        return -1;
+    }
+
     public int getId(){
-        return this.CPF;
+        return this.idalunos;
+    }
+
+    public void setId(int idalunos){
+        this.idalunos = idalunos;
+    }
+
+    public String getCpf(){
+        return this.cpf;
+    }
+
+    public void setCpf(String cpf){
+        this.cpf = cpf;
     }
 
     @Override
@@ -45,7 +83,6 @@ public class Aluno implements User{
     public void setEmail(String email){
         this.email =email;
     }
-
 
     public Map<String, Double> getProgresso(){
         return this.progresso;
