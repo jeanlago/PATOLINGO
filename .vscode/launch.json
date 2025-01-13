@@ -1,0 +1,13 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "java",
+      "name": "Launch OGNILOUD",
+      "request": "launch",
+      "mainClass": "Grafica.Screen",
+      "projectName": "OGNILOUD",
+      "vmArgs": "--class-path ${workspaceFolder}/src/java;${workspaceFolder}/src/resources"
+    }
+  ]
+}
