@@ -263,6 +263,31 @@ public class BancoDeDados {
     }
 
 
+    public int getIdUsuarioPorAluno(int idAluno) throws SQLException {
+        String sql = "SELECT idusuarios FROM usuarios WHERE id_aluno = ?";
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setInt(1, idAluno);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return rs.getInt("idusuarios");
+            }
+        }
+        throw new SQLException("Nenhum usuário encontrado para o ID do aluno: " + idAluno);
+    }
+
+
+    public int getIdUsuarioPorProfessor(int idProfessor) throws SQLException {
+        String sql = "SELECT idusuarios FROM usuarios WHERE id_professor = ?";
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setInt(1, idProfessor);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return rs.getInt("idusuarios");
+            }
+        }
+        throw new SQLException("Usuário não encontrado para o professor com ID: " + idProfessor);
+    }
+
 
     public int getIdReferencia(String email, String tipo) throws SQLException {
         String sql = "SELECT id_aluno, id_professor FROM usuarios WHERE email = ?";
@@ -447,5 +472,58 @@ public class BancoDeDados {
         }
         return perguntas;
     }
+
+    public void atualizarFotoPerfil(int idUsuario, String caminhoFoto) throws SQLException {
+        String sql = "UPDATE usuarios SET foto_perfil = ? WHERE idusuarios = ?";
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setString(1, caminhoFoto);
+            stmt.setInt(2, idUsuario);
+            int linhasAfetadas = stmt.executeUpdate();
+            if (linhasAfetadas == 0) {
+                throw new SQLException("Erro: Nenhum usuário encontrado com o ID: " + idUsuario);
+            }
+        }
+    }
+
+    public String getFotoPerfil(int idUsuario) throws SQLException {
+        String sql = "SELECT foto_perfil FROM usuarios WHERE idusuarios = ?";
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setInt(1, idUsuario);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return rs.getString("foto_perfil");
+            }
+        }
+        return null;
+    }
+
+    public void atualizarFundoTela(int idUsuario, String caminhoFoto) throws SQLException {
+        String sql = "UPDATE usuarios SET foto_fundo = ? WHERE idusuarios = ?";
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            System.out.println("Atualizando fundo: ID = " + idUsuario + ", Caminho = " + caminhoFoto);
+            stmt.setString(1, caminhoFoto);
+            stmt.setInt(2, idUsuario);
+            int linhasAfetadas = stmt.executeUpdate();
+            if (linhasAfetadas == 0) {
+                throw new SQLException("Nenhum registro encontrado para o ID: " + idUsuario);
+            }
+        }
+    }
+
+
+    public String getFundoTela(int idUsuario) throws SQLException {
+        String sql = "SELECT foto_fundo FROM usuarios WHERE idusuarios = ?";
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setInt(1, idUsuario);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                String caminho = rs.getString("foto_fundo");
+                System.out.println("Caminho do fundo recuperado: " + caminho);
+                return caminho;
+            }
+        }
+        return null;
+    }
+
 
 }

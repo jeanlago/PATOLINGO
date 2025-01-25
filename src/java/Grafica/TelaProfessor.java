@@ -13,6 +13,7 @@ public class TelaProfessor {
     private final JFrame frame;
     private final int idProfessor;
     private BancoDeDados bancoDeDados;
+    private int idUsuario;
 
     public TelaProfessor(JFrame frame, int idProfessor) {
         this.frame = frame;
@@ -20,6 +21,8 @@ public class TelaProfessor {
 
         try {
             this.bancoDeDados = new BancoDeDados();
+            this.idUsuario = bancoDeDados.getIdUsuarioPorProfessor(idProfessor);
+            System.out.println("ID do usuário carregado: " + idUsuario);
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(frame, "Erro ao conectar com o banco de dados: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
         }
@@ -34,17 +37,25 @@ public class TelaProfessor {
         frame.setIconImage(new ImageIcon("C:\\Users\\JeanM\\OneDrive\\Documentos\\OGNILOUD\\OGNILOUD\\src\\resources\\images\\Logo.png").getImage());
 
 
-        String backgroundPath = "C:/Users/JeanM/OneDrive/Documentos/OGNILOUD/OGNILOUD/src/resources/images/background_professor.png";
-        ImageIcon backgroundImage = new ImageIcon(backgroundPath);
-        JLabel backgroundLabel = new JLabel(backgroundImage);
-        backgroundLabel.setBounds(0, 0, frame.getWidth(), frame.getHeight());
+        String backgroundPath;
+        try {
+            backgroundPath = bancoDeDados.getFundoTela(idUsuario);
+            if (backgroundPath == null || backgroundPath.isEmpty()) {
+                backgroundPath = "C:/Users/JeanM/OneDrive/Documentos/OGNILOUD/OGNILOUD/src/resources/images/background_aluno.png";
+            }
+        } catch (SQLException e) {
+            backgroundPath = "C:/Users/JeanM/OneDrive/Documentos/OGNILOUD/OGNILOUD/src/resources/images/background_aluno.png";
+        }
+
+        JLabel backgroundLabel = new JLabel(new ImageIcon(new ImageIcon(backgroundPath).getImage()));
+        backgroundLabel.setBounds(-10, -5,1280,720);
 
 
         JPanel painelCentral = new JPanel();
-        painelCentral.setBounds(434, 200, 411, 750);
+        painelCentral.setBounds(434, 200, 411, 600);
         painelCentral.setLayout(new BoxLayout(painelCentral, BoxLayout.Y_AXIS));
         painelCentral.setOpaque(false);
-        painelCentral.add(Box.createVerticalStrut(180));
+        painelCentral.add(Box.createVerticalStrut(170));
 
 
         JLabel professorNome = new JLabel("Bem-vindo, Professor!");
@@ -99,19 +110,21 @@ public class TelaProfessor {
         painelCentral.add(botaoVerAlunos);
         painelCentral.add(Box.createVerticalStrut(20));
 
+        JButton botaoAlterarFundo = new JButton(new ImageIcon(new ImageIcon("C:/Users/JeanM/OneDrive/Documentos/OGNILOUD/OGNILOUD/src/resources/images/Profile/change_button.png").getImage().getScaledInstance(25, 25, Image.SCALE_SMOOTH)));
+        botaoAlterarFundo.setBounds(718, 304, 40, 40);
+        botaoAlterarFundo.setContentAreaFilled(false);
+        botaoAlterarFundo.setBorderPainted(false);
+        botaoAlterarFundo.addActionListener(e -> alterarFundoTela());
 
-        String botaoVoltarPath = "C:\\Users\\JeanM\\OneDrive\\Documentos\\OGNILOUD\\OGNILOUD\\src\\resources\\images\\botao_voltar.png";
-        ImageIcon iconVoltar = new ImageIcon(botaoVoltarPath);
-        Image imagemRedimensionada = iconVoltar.getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH);
-        iconVoltar = new ImageIcon(imagemRedimensionada);
-        JButton botaoVoltar = new JButton(iconVoltar);
-        botaoVoltar.setBounds(10, 10, 70, 70);
+
+        JButton botaoVoltar = new JButton(new ImageIcon(new ImageIcon("C:/Users/JeanM/OneDrive/Documentos/OGNILOUD/OGNILOUD/src/resources/images/botao_voltar.png").getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH)));
+        botaoVoltar.setBounds(10, 10, 40, 40);
         botaoVoltar.setContentAreaFilled(false);
         botaoVoltar.setBorderPainted(false);
-        botaoVoltar.setFocusPainted(false);
         botaoVoltar.addActionListener(e -> new TelaLogin(frame));
 
         frame.add(botaoVoltar);
+        frame.add(botaoAlterarFundo);
         frame.add(painelCentral);
         frame.add(backgroundLabel);
         frame.revalidate();
@@ -203,7 +216,8 @@ public class TelaProfessor {
     }
 
     private void registrarPerguntas() {
-        String[] idiomasDisponiveis = {"Inglês", "Português", "Espanhol", "Francês"};
+        String[] idiomasDisponiveis = {"Inglês", "Português", "Espanhol", "Francês", "Alemão", "Italiano", "Japonês", "Chinês", "Russo", "Coreano"};
+
 
         String textoPergunta = JOptionPane.showInputDialog(frame, "Digite o texto da pergunta:");
         if (textoPergunta == null || textoPergunta.trim().isEmpty()) {
@@ -288,5 +302,50 @@ public class TelaProfessor {
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(frame, "Erro ao carregar lista de alunos: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
         }
+    }
+
+    private void alterarFundoTela() {
+        JFrame janelaSelecao = new JFrame("Selecione o Fundo");
+        janelaSelecao.setSize(600, 400);
+        janelaSelecao.setLayout(new FlowLayout());
+        janelaSelecao.setLocationRelativeTo(null);
+
+        String[][] caminhosFotos = {
+            {"C:/Users/JeanM/OneDrive/Documentos/OGNILOUD/OGNILOUD/src/resources/images/Profile/Donald_Avatar.png",
+             "C:/Users/JeanM/OneDrive/Documentos/OGNILOUD/OGNILOUD/src/resources/images/Profile_Professor/Donald_Profile.png"},
+            {"C:/Users/JeanM/OneDrive/Documentos/OGNILOUD/OGNILOUD/src/resources/images/Profile/Pata_Avatar.png",
+             "C:/Users/JeanM/OneDrive/Documentos/OGNILOUD/OGNILOUD/src/resources/images/Profile_Professor/Pata_profile.png"},
+            {"C:/Users/JeanM/OneDrive/Documentos/OGNILOUD/OGNILOUD/src/resources/images/Profile/Duck_Avatar.png",
+             "C:/Users/JeanM/OneDrive/Documentos/OGNILOUD/OGNILOUD/src/resources/images/Profile_Professor/Duck_profile.png"},
+            {"C:/Users/JeanM/OneDrive/Documentos/OGNILOUD/OGNILOUD/src/resources/images/Profile/None_Avatar.png",
+             "C:/Users/JeanM/OneDrive/Documentos/OGNILOUD/OGNILOUD/src/resources/images/Profile_Professor/None_profile.png"}
+        };
+
+        for (String[] caminhos : caminhosFotos) {
+            String caminhoExibicao = caminhos[0];
+            String caminhoFundo = caminhos[1];
+
+            JButton botaoImagem = new JButton(
+                new ImageIcon(new ImageIcon(caminhoExibicao)
+                    .getImage()
+                    .getScaledInstance(100, 100, Image.SCALE_SMOOTH))
+            );
+
+            botaoImagem.setContentAreaFilled(false);
+            botaoImagem.setBorderPainted(false);
+            botaoImagem.addActionListener(e -> {
+                try {
+                    bancoDeDados.atualizarFundoTela(idUsuario, caminhoFundo);
+                    criarTelaProfessor();
+                    JOptionPane.showMessageDialog(frame, "Fundo alterado com sucesso!");
+                    janelaSelecao.dispose();
+                } catch (SQLException ex) {
+                    JOptionPane.showMessageDialog(frame, "Erro ao salvar fundo: " + ex.getMessage());
+                }
+            });
+
+            janelaSelecao.add(botaoImagem);
+        }
+        janelaSelecao.setVisible(true);
     }
 }
