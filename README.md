@@ -143,10 +143,6 @@ O banco de dados contém as seguintes tabelas principais:
 
 Este sistema é um projeto em andamento e pode ser ampliado com novas funcionalidades, como relatórios ou integração com APIs externas.
 
-## Contribuições
-
-Contribuições são bem-vindas! Para contribuir, faça um fork deste repositório, crie uma branch para sua funcionalidade ou correção, e envie um pull request.
-
 ## Licença
 
 Este projeto está licenciado sob a MIT License.
