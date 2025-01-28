@@ -1,0 +1,9 @@
+{
+    "jdk.runConfig.vmOptions": "--enable-preview --source 21",
+    "java.project.sourcePaths": [
+        "src\\java"
+    ],
+    "java.project.referencedLibraries": [
+        "src\\java\\libs\\mysql-connector-j-9.0.0.jar"
+    ]
+}

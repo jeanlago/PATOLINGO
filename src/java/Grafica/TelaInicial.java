@@ -33,10 +33,12 @@ public class TelaInicial {
         painelCentral.add(Box.createVerticalStrut(150));
 
 
-        RoundedButton botaoLogin = new RoundedButton("Logar", 30);
+        RoundedButton botaoLogin = new RoundedButton("Logar", 80);
         botaoLogin.setFont(new Font("Arial", Font.BOLD, 50));
         botaoLogin.setAlignmentX(JButton.CENTER_ALIGNMENT);
-        botaoLogin.setMaximumSize(new Dimension(411, 80));
+        botaoLogin.setMaximumSize(new Dimension(411, 100));
+        botaoLogin.setPreferredSize(new Dimension(411, 100));
+        botaoLogin.setMinimumSize(new Dimension(411, 100));
         botaoLogin.setBackground(new Color(65, 184, 190));
         botaoLogin.setForeground(Color.WHITE);
         botaoLogin.setFocusPainted(false);
@@ -46,10 +48,12 @@ public class TelaInicial {
         painelCentral.add(Box.createVerticalStrut(50));
 
 
-        RoundedButton botaoCadastrar = new RoundedButton("Cadastrar-se", 30);
+        RoundedButton botaoCadastrar = new RoundedButton("Cadastrar-se", 80);
         botaoCadastrar.setFont(new Font("Arial", Font.BOLD, 50));
         botaoCadastrar.setAlignmentX(JButton.CENTER_ALIGNMENT);
-        botaoCadastrar.setMaximumSize(new Dimension(411, 70));
+        botaoCadastrar.setMaximumSize(new Dimension(411, 100));
+        botaoCadastrar.setPreferredSize(new Dimension(411, 100));
+        botaoCadastrar.setMinimumSize(new Dimension(411, 100));
         botaoCadastrar.setBackground(new Color(65, 184, 190));
         botaoCadastrar.setForeground(Color.WHITE);
         botaoCadastrar.setFocusPainted(false);

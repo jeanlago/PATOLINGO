@@ -82,11 +82,11 @@ public class TelaLogin {
 
 
         RoundedButton botaoEntrar = new RoundedButton("Entrar", 30);
-        botaoEntrar.setFont(new Font("Arial", Font.BOLD, 50));
+        botaoEntrar.setFont(new Font("Arial", Font.BOLD, 40));
         botaoEntrar.setAlignmentX(JButton.CENTER_ALIGNMENT);
-        botaoEntrar.setMaximumSize(new Dimension(411, 80));
-        botaoEntrar.setPreferredSize(new Dimension(411, 80));
-        botaoEntrar.setMinimumSize(new Dimension(411, 80));
+        botaoEntrar.setMaximumSize(new Dimension(411, 70));
+        botaoEntrar.setPreferredSize(new Dimension(411, 70));
+        botaoEntrar.setMinimumSize(new Dimension(411, 70));
         botaoEntrar.setBackground(new Color(65, 184, 190));
         botaoEntrar.setForeground(Color.WHITE);
 
