@@ -15,7 +15,7 @@ public class VerificarLogin {
         try {
             Object usuario = bancoDeDados.verificarLogin(email.trim(), senha.trim());
             if (usuario instanceof Aluno aluno) {
-                JOptionPane.showMessageDialog(frame, "Login bem-sucedido! Bem-vindo, " + aluno.getNome() + "!");
+                JOptionPane.showMessageDialog(frame, "Login bem-sucedido! Bem-vindo, " + aluno.getNome() + "!", "Sucesso",JOptionPane.INFORMATION_MESSAGE);
                 new Grafica.TelaAluno(frame, bancoDeDados.getIdReferencia(email, "aluno"));
             } else if (usuario instanceof Professor professor) {
                 JOptionPane.showMessageDialog(frame, "Login bem-sucedido! Bem-vindo, Professor " + professor.getNome() + "!");

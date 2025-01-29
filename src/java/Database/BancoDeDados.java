@@ -7,7 +7,6 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import javax.swing.JOptionPane;
 
 public class BancoDeDados {
     private static final String URL = "jdbc:mysql://localhost:3306/ogniloud";
@@ -221,8 +220,6 @@ public class BancoDeDados {
             if (rs.next()) {
                 String tipo = rs.getString("tipo");
                 int idReferencia = tipo.equals("aluno") ? rs.getInt("id_aluno") : rs.getInt("id_professor");
-
-                JOptionPane.showMessageDialog(null, "Login realizado com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
 
                 if (tipo.equals("aluno")) {
                     return getAluno(idReferencia);
