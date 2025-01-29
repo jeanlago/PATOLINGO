@@ -95,7 +95,7 @@ public class TelaAluno {
         painelCentral.add(Box.createVerticalStrut(65));
 
 
-        barraProgresso = new TransparentProgressBar(0, 100);
+        barraProgresso = new TransparentProgressBar(0, 90);
         barraProgresso.setValue(xpAtual);
         barraProgresso.setString("XP: " + xpAtual + " | Nível: " + nivelAtual);
         barraProgresso.setStringPainted(false);

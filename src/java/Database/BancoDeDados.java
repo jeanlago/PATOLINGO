@@ -313,13 +313,40 @@ public class BancoDeDados {
     }
 
     public void atualizarProgresso(int idAluno, int xpGanho) throws SQLException {
-        String sql = "UPDATE progresso_alunos SET xp = xp + ? WHERE id_aluno = ?";
-        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
-            stmt.setInt(1, xpGanho);
-            stmt.setInt(2, idAluno);
-            stmt.executeUpdate();
+        String sqlAtualizarXP = "UPDATE progresso_alunos SET xp = xp + ? WHERE id_aluno = ?";
+        try (PreparedStatement stmtAtualizarXP = connection.prepareStatement(sqlAtualizarXP)) {
+            stmtAtualizarXP.setInt(1, xpGanho);
+            stmtAtualizarXP.setInt(2, idAluno);
+            stmtAtualizarXP.executeUpdate();
+        }
+
+        String sqlObterProgresso = "SELECT xp, nivel FROM progresso_alunos WHERE id_aluno = ?";
+        try (PreparedStatement stmtObterProgresso = connection.prepareStatement(sqlObterProgresso)) {
+            stmtObterProgresso.setInt(1, idAluno);
+            try (ResultSet rs = stmtObterProgresso.executeQuery()) {
+                if (rs.next()) {
+                    int xpAtual = rs.getInt("xp");
+                    int nivelAtual = rs.getInt("nivel");
+
+                    if (xpAtual >= 100) {
+                        int novoNivel = nivelAtual + 1;
+                        int xpRestante = xpAtual - 100;
+
+                        String sqlAtualizarNivel = "UPDATE progresso_alunos SET nivel = ?, xp = ? WHERE id_aluno = ?";
+                        try (PreparedStatement stmtAtualizarNivel = connection.prepareStatement(sqlAtualizarNivel)) {
+                            stmtAtualizarNivel.setInt(1, novoNivel);
+                            stmtAtualizarNivel.setInt(2, xpRestante);
+                            stmtAtualizarNivel.setInt(3, idAluno);
+                            stmtAtualizarNivel.executeUpdate();
+                        }
+
+                        System.out.println("Aluno subiu de nível! Novo nível: " + novoNivel + ", XP restante: " + xpRestante);
+                    }
+                }
+            }
         }
     }
+
 
     public void verificarNivel(int idAluno) throws SQLException {
         String sql = "SELECT xp, nivel FROM progresso_alunos WHERE id_aluno = ?";
