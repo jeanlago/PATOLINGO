@@ -1,8 +1,10 @@
--- MySQL dump 10.13  Distrib 8.0.40, for Win64 (x86_64)
+CREATE DATABASE  IF NOT EXISTS `ogniloud` /*!40100 DEFAULT CHARACTER SET utf8mb3 */ /*!80016 DEFAULT ENCRYPTION='N' */;
+USE `ogniloud`;
+-- MySQL dump 10.13  Distrib 8.0.41, for Win64 (x86_64)
 --
 -- Host: localhost    Database: ogniloud
 -- ------------------------------------------------------
--- Server version	8.0.40
+-- Server version	8.0.41
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -30,7 +32,7 @@ CREATE TABLE `progresso_alunos` (
   PRIMARY KEY (`idprogresso`),
   UNIQUE KEY `id_aluno_UNIQUE` (`id_aluno`),
   CONSTRAINT `fk_progresso_alunos` FOREIGN KEY (`id_aluno`) REFERENCES `alunos` (`idalunos`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -39,7 +41,7 @@ CREATE TABLE `progresso_alunos` (
 
 LOCK TABLES `progresso_alunos` WRITE;
 /*!40000 ALTER TABLE `progresso_alunos` DISABLE KEYS */;
-INSERT INTO `progresso_alunos` VALUES (1,2,50,1),(2,4,62,1),(3,7,4,1),(4,8,10,1);
+INSERT INTO `progresso_alunos` VALUES (1,2,50,1),(2,4,80,1),(3,7,4,1),(4,8,10,1),(5,9,0,1);
 /*!40000 ALTER TABLE `progresso_alunos` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -52,4 +54,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-01-24 23:46:57
+-- Dump completed on 2025-01-28 22:45:35
