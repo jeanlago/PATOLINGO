@@ -207,7 +207,7 @@ public class TelaAluno {
         idiomaFrame.setSize(400, 300);
         idiomaFrame.setLocationRelativeTo(frame);
         idiomaFrame.setLayout(new BorderLayout());
-
+        idiomaFrame.setIconImage(new ImageIcon("C:\\Users\\JeanM\\OneDrive\\Documentos\\OGNILOUD\\OGNILOUD\\src\\resources\\images\\Logo.png").getImage());
         DefaultListModel<String> listModel = new DefaultListModel<>();
         idiomasDisponiveis.forEach(listModel::addElement);
         JList<String> listaIdiomas = new JList<>(listModel);
@@ -234,7 +234,7 @@ public class TelaAluno {
         janelaSelecao.setSize(600, 400);
         janelaSelecao.setLayout(new FlowLayout());
         janelaSelecao.setLocationRelativeTo(null);
-
+        janelaSelecao.setIconImage(new ImageIcon("C:\\Users\\JeanM\\OneDrive\\Documentos\\OGNILOUD\\OGNILOUD\\src\\resources\\images\\Logo.png").getImage());
         String[][] caminhosFotos = {
             {"C:/Users/JeanM/OneDrive/Documentos/OGNILOUD/OGNILOUD/src/resources/images/Profile/Donald_Avatar.png",
              "C:/Users/JeanM/OneDrive/Documentos/OGNILOUD/OGNILOUD/src/resources/images/Profile/Donald_Profile.png"},

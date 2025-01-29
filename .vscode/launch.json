@@ -3,6 +3,13 @@
   "configurations": [
     {
       "type": "java",
+      "name": "Main",
+      "request": "launch",
+      "mainClass": "Main.Main",
+      "projectName": "OGNILOUD_486a6f01"
+    },
+    {
+      "type": "java",
       "name": "Launch OGNILOUD",
       "request": "launch",
       "mainClass": "Grafica.Screen",
