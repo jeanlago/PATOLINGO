@@ -11,7 +11,7 @@ public class Main {
     public static void main(String[] args) {
         try {
             bancoDeDados = new BancoDeDados();
-            JFrame frame = new JFrame("OGNILOUD");
+            JFrame frame = new JFrame("PATOLINGO");
             frame.setSize(1280, 720);
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             frame.setLayout(null);

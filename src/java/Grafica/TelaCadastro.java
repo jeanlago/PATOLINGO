@@ -130,7 +130,7 @@ public class TelaCadastro {
 
 
         RoundedButton botaoCadastrar = new RoundedButton("Cadastrar-se", 30);
-        botaoCadastrar.setFont(new Font("Arial", Font.BOLD, 30));
+        botaoCadastrar.setFont(new Font("Arial", Font.BOLD, 40));
         botaoCadastrar.setAlignmentX(JButton.CENTER_ALIGNMENT);
         botaoCadastrar.setMaximumSize(new Dimension(411, 60));
         botaoCadastrar.setPreferredSize(new Dimension(411, 60));
