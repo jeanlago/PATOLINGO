@@ -219,7 +219,7 @@ public class TelaProfessor {
         String[] idiomasDisponiveis = {"Inglês", "Português", "Espanhol", "Francês", "Alemão", "Italiano", "Japonês", "Chinês", "Russo", "Coreano"};
 
 
-        String textoPergunta = JOptionPane.showInputDialog(frame, "Digite o texto da pergunta:");
+        String textoPergunta = JOptionPane.showInputDialog(frame, "Digite o texto da pergunta:","Registrar Pergunta", JOptionPane.QUESTION_MESSAGE);
         if (textoPergunta == null || textoPergunta.trim().isEmpty()) {
             JOptionPane.showMessageDialog(frame, "O campo pergunta não pode estar vazio!");
             return;
